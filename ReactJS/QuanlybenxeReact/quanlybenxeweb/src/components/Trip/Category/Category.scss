@@ -1,0 +1,30 @@
+.card-container {
+    .card {
+      border: 1px solid #ddd; // Thiết lập đường viền cho các thẻ
+      margin-bottom: 20px; // Khoảng cách giữa các thẻ theo chiều dọc
+      max-width: 100%; // Thiết lập chiều rộng tối đa
+      height: 100%; // Thiết lập chiều cao để các thẻ có cùng chiều cao
+      display: flex;
+      flex-direction: column; // Đảm bảo nội dung bên trong sắp xếp theo chiều dọc
+    }
+  
+    .card-body {
+      flex-grow: 1; // Cho phép thẻ body chiếm phần lớn diện tích thẻ
+      padding: 20px; // Khoảng cách bên trong thẻ
+    }
+  
+    .card-title {
+      margin-bottom: 10px; // Khoảng cách giữa tiêu đề và nội dung thẻ
+    }
+  
+    .card-text {
+      margin-bottom: 10px; // Khoảng cách giữa các dòng văn bản trong thẻ
+    }
+  
+    .card-buttons {
+      margin-top: auto; // Đẩy các nút xuống dưới cùng của thẻ
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+  

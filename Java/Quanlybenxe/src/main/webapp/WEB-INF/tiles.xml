@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+"http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+
+<tiles-definitions>
+    <definition name="baseLayout" template="/WEB-INF/layout/base.jsp">
+        <put-attribute name="title" value="" />
+        <put-attribute name="header" value="/WEB-INF/layout/header.jsp" />
+        <put-attribute name="footer" value="/WEB-INF/layout/footer.jsp" />
+        <put-attribute name="content" value="" />
+         <put-attribute name="sidebar" value="/WEB-INF/layout/sidebar.jsp" />
+    </definition>
+    <definition name="index" extends="baseLayout">
+        <put-attribute name="title" value="Trang chủ quản trị" />
+        <put-attribute name="content" value="/WEB-INF/pages/index.jsp" />
+    </definition>
+    
+    
+    <definition name="bus-form" extends="baseLayout">
+        <put-attribute name="title" value="Thêm Xe Khách" />
+        <put-attribute name="content" value="/WEB-INF/pages/buses.jsp" />
+    </definition>
+    
+    <definition name="bus-list" extends="baseLayout">
+        <put-attribute name="title" value="Danh Sách Xe Khách" />
+        <put-attribute name="content" value="/WEB-INF/pages/bus_list.jsp" />
+    </definition>
+    
+    
+    <definition name="routes-form" extends="baseLayout">
+        <put-attribute name="title" value="Thêm Tuyến Đường" />
+        <put-attribute name="content" value="/WEB-INF/pages/route.jsp" />
+    </definition>
+    
+    <definition name="route-list" extends="baseLayout">
+        <put-attribute name="title" value="Danh Sách Tuyến Đường"/>
+        <put-attribute name="content" value="/WEB-INF/pages/route_list.jsp" />
+    </definition>
+    
+    
+    <definition name="company-form" extends="baseLayout">
+        <put-attribute name="title" value="Thêm Nhà Xe" />
+        <put-attribute name="content" value="/WEB-INF/pages/company.jsp" />
+    </definition>
+    
+    <definition name="company-list" extends="baseLayout">
+        <put-attribute name="title" value="Danh Sách Nhà Xe" />
+        <put-attribute name="content" value="/WEB-INF/pages/company_list.jsp" />
+    </definition>
+    
+    
+    <definition name="category-form" extends="baseLayout">
+        <put-attribute name="title" value="Thêm loại xe" />
+        <put-attribute name="content" value="/WEB-INF/pages/category.jsp" />
+    </definition>
+    
+    <definition name="category-list" extends="baseLayout">
+        <put-attribute name="title" value="Danh sách loại xe" />
+        <put-attribute name="content" value="/WEB-INF/pages/category_list.jsp" />
+    </definition>
+    
+    
+    <definition name="trip-form" extends="baseLayout">
+        <put-attribute name="title" value="Thêm chuyến xe" />
+        <put-attribute name="content" value="/WEB-INF/pages/trip.jsp" />
+    </definition>
+    
+    <definition name="trip-list" extends="baseLayout">
+        <put-attribute name="title" value="Danh sách chuyến xe" />
+        <put-attribute name="content" value="/WEB-INF/pages/trip_list.jsp" />
+    </definition>
+    
+    
+    
+    <definition name="stats" extends="baseLayout">
+        <put-attribute name="title" value="Trang quản thống kê " />
+        <put-attribute name="content" value="/WEB-INF/pages/stats.jsp" />
+    </definition>
+     
+    
+</tiles-definitions>
