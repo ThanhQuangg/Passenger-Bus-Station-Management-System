@@ -23,13 +23,7 @@ public class BusesController {
 
     @Autowired
     private BusService busService;
-
-//    @GetMapping("/buses")
-//    public String createView(Model model) {
-//        List<Bus> buses = busService.getBuses(Collections.emptyMap());
-//        model.addAttribute("bus", new Bus());
-//        return "buses";
-//    }
+    
     @GetMapping("/buses")
     public String showBusList(@RequestParam Map<String, String> params, Model model) {
         List<Bus> buses = busService.getBuses(params);

@@ -2,9 +2,7 @@ package com.ntq.controllers;
 
 import com.ntq.pojo.Comment;
 import com.ntq.pojo.Company;
-import com.ntq.pojo.Bus;
 import com.ntq.pojo.User;
-import com.ntq.services.BusService;
 import com.ntq.services.UserService;
 import com.ntq.services.CompanyService;
 import com.ntq.services.CommentService;

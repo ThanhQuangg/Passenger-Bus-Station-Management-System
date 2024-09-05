@@ -68,14 +68,4 @@ public class ApiCartController {
         
         return new ResponseEntity<>(Utils.cartStats(cart), HttpStatus.OK);
     }
-    
-//    @PostMapping("/pay")
-//    public ResponseEntity pay(HttpSession session) {
-//        if (this.tripService.addReceipt((Map<String, Cart>) session.getAttribute("cart"))) {
-//            session.removeAttribute("cart");
-//            return new ResponseEntity(HttpStatus.OK);
-//        }
-//        
-//        return new ResponseEntity(HttpStatus.BAD_REQUEST);
-//    }
 }

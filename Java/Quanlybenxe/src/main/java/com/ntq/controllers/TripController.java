@@ -6,7 +6,6 @@ import com.ntq.services.BusService;
 import com.ntq.services.TripService;
 import java.util.List;
 import java.util.Map;
-import javax.persistence.Access;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -48,28 +47,6 @@ public class TripController {
         return "trip-form";
     }
 
-//    @PostMapping("/trips")
-//    public String createRoute(@ModelAttribute(value = "trip") @Valid Trip t,
-//            BindingResult rs, Model model) {
-//        if (!rs.hasErrors()) {
-//            try {
-//                this.tripServices.addOrUpdate(t);
-//                return "redirect:/trips";
-//            } catch (Exception ex) {
-////                System.err.println(ex.getMessage());
-//                ex.printStackTrace();
-//            }
-//        }
-//        if (rs.hasErrors()) {
-//            rs.getAllErrors().forEach(error -> System.out.println(error));
-//            model.addAttribute("trip", t);
-//            return "trip-form";
-//        }
-//
-//        model.addAttribute("trip", t);
-//
-//        return "trip-form";
-//    }
     @PostMapping("/trips")
     public String createRoute(@ModelAttribute(value = "trip") @Valid Trip t,
             BindingResult rs, Model model) {
