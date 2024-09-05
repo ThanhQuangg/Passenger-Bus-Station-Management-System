@@ -3,7 +3,7 @@ import { Badge, Button, Col, Container, Form, Image, Nav, Navbar, NavDropdown, R
 import { Link, useNavigate } from "react-router-dom";
 import APIs, { endpoints } from "../../configs/APIs";
 import MySpinner from "./MySpinner";
-import { MyDispatchContext, MyUserContext, MyCartContext } from "../../configs/Contexts";
+import { MyDispatchContext, MyUserContext, useCart } from "../../configs/Contexts";
 
 const Header = () => {
     const [categories, setCategories] = useState([]);
@@ -13,12 +13,17 @@ const Header = () => {
     const nav = useNavigate();
     const user = useContext(MyUserContext);
     const dispatch = useContext(MyDispatchContext);
-    const { getCartCount } = useContext(MyCartContext);
+    const { cart, getCartCount } = useCart();
     const [cartCount, setCartCount] = useState(getCartCount());
 
     useEffect(() => {
         loadCategories();
     }, []);
+
+    // Lắng nghe sự thay đổi của giỏ hàng để cập nhật số lượng
+    useEffect(() => {
+        setCartCount(getCartCount());
+    }, [cart]);
 
     const loadCategories = async () => {
         try {
@@ -39,18 +44,8 @@ const Header = () => {
         nav(`/?q=${q}`);
     };
 
-    // const searchTrip = (e) => {
-    //     e.preventDefault();
-    //     nav(`/?departure=${departure}&destination=${destination}`);
-    // };
-
-    
-
     const showDanhMuc = user?.userRole === "ROLE_ADMIN" || user?.userRole === "ROLE_COMPANY";
 
-    useEffect(() => {
-        setCartCount(getCartCount());
-    }, [getCartCount]);
     return (
         <>
             {categories === null ? <MySpinner /> :
@@ -80,7 +75,7 @@ const Header = () => {
                                     ))}
                                 </NavDropdown>
                                 <Link className="nav-link" to="/carts">
-                                    &#128722; <Badge bg="danger">{getCartCount()}</Badge>
+                                    &#128722; <Badge bg="danger">{cartCount}</Badge>
                                 </Link>
                                 {user === null ? (
                                     <>
@@ -107,32 +102,6 @@ const Header = () => {
                                 </Col>
                             </Row>
                         </Form>
-                        {/* <Form inline onSubmit={searchTrip} className="m-2">
-                            <Row>
-                                <Col xs="auto">
-                                    <Form.Control
-                                        type="text"
-                                        value={departure}
-                                        onChange={e => setDeparture(e.target.value)}
-                                        placeholder="Điểm đi"
-                                        className="mr-sm-2"
-                                    />
-                                </Col>
-                                <Col xs="auto">
-                                    <Form.Control
-                                        type="text"
-                                        value={destination}
-                                        onChange={e => setDestination(e.target.value)}
-                                        placeholder="Điểm đến"
-                                        className="mr-sm-2"
-                                    />
-                                </Col>
-                                <Col xs="auto">
-                                    <Button type="submit">Tìm</Button>
-                                </Col>
-                            </Row>
-                        </Form> */}
-
                     </Container>
                 </Navbar>
             }

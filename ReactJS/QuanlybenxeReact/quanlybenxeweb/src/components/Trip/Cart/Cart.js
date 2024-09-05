@@ -23,16 +23,14 @@ const Cart = () => {
 
     const addPay = async (e, item) => {
         e.preventDefault();
-        
+
         const payData = {
-            [`cart1`]: {   
+            cart1: {
                 id: item.id,
                 quantity: item.quantity,
-                price: item.price
+                price: parseFloat(item.price),
             }
         };
-
-        console.log("Data sent to server:", payData);
 
         try {
             let res = await APIs.post(endpoints['pay'], JSON.stringify(payData), {
@@ -41,13 +39,23 @@ const Cart = () => {
                     'Authorization': ` ${cookie.load('token')}`
                 }
             });
-            if (res.status === 201) {
-                nav("/");
+
+            if (res.status === 200) {
+                const updatedCart = { ...cart }; // Tạo bản sao của cart
+                delete updatedCart[item.id]; // Xóa sản phẩm đã thanh toán khỏi cart
+
+                // Cập nhật cookie và state với giỏ hàng mới
+                cookie.save('cart', updatedCart);
+                setCart(updatedCart);
+
+                // Điều hướng về trang chủ
+                nav("/carts");
             }
         } catch (ex) {
             console.error(ex);
         }
     }
+
 
     return (
         <Container>
