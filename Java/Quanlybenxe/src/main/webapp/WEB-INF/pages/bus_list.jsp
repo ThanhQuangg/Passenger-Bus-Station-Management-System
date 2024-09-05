@@ -21,11 +21,11 @@
             <td>${b.plateNumber}</td>
             <td>${b.capacity}</td>
             <td>${b.categoryID.name}</td>
-            <td>
-                <c:url value="/api/buses/${b.busID}" var="url" />
-                <a class="btn btn-info" href="<c:url value='/buses/add/${b.busID}'/>">Cập nhật</a>
-                <button onclick="deleteBus('${url}', ${b.busID})" class="btn btn-danger">Xóa</button>
-            </td>
+                <td>
+                    <c:url value="/buses/${b.busID}" var="url" />
+                    <a class="btn btn-info" href="<c:url value='/buses/${b.busID}'/>">Cập nhật</a>
+                    <button onclick="deleteBus('${url}', ${b.busID})" class="btn btn-danger">Xóa</button>
+                </td>
 
 
         </tr>

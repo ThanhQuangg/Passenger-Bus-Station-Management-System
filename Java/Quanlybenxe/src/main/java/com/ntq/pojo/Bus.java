@@ -1,8 +1,11 @@
 package com.ntq.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Set;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,6 +15,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -21,10 +25,6 @@ import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import org.springframework.web.multipart.MultipartFile;
 
-/**
- *
- * @author ACER
- */
 @Entity
 @Table(name = "bus")
 @XmlRootElement
@@ -71,6 +71,11 @@ public class Bus implements Serializable {
     @JoinColumn(name = "CompanyID", referencedColumnName = "CompanyID")
     @ManyToOne
     private Company companyID;
+    
+    @JsonIgnore
+    @OneToMany(mappedBy = "busID", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Trip> tripSet;
+    
     @Transient
     private MultipartFile file;
 
@@ -142,19 +147,19 @@ public class Bus implements Serializable {
         this.name = name;
     }
 
-    public Category  getCategoryID() {
+    public Category getCategoryID() {
         return categoryID;
     }
 
-    public void setCategoryID(Category  categoryID) {
+    public void setCategoryID(Category categoryID) {
         this.categoryID = categoryID;
     }
 
-    public Company  getCompanyID() {
+    public Company getCompanyID() {
         return companyID;
     }
 
-    public void setCompanyID(Company  companyID) {
+    public void setCompanyID(Company companyID) {
         this.companyID = companyID;
     }
 
@@ -190,5 +195,17 @@ public class Bus implements Serializable {
     public void setFile(MultipartFile file) {
         this.file = file;
     }
+
+    
+    public Set<Trip> getTripSet() {
+        return tripSet;
+    }
+
+    
+    public void setTripSet(Set<Trip> tripSet) {
+        this.tripSet = tripSet;
+    }
+
+    
 
 }

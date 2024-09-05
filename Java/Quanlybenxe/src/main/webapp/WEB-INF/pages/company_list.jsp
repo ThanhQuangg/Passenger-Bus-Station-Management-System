@@ -21,9 +21,9 @@
             <td>${c.email}</td>
             <td>${c.phoneNumber}</td>
             <td>
-                <c:url value="/api/companies/${c.companyID}" var="url" />
+                <c:url value="/companies/${c.companyID}" var="url" />
                 <a class="btn btn-info"href="<c:url value="/companies/${c.companyID}"/>" >Cập nhật</a>
-                <button onclick="deleteBus('${url}',${b.busID})" class="btn btn-danger">Xóa</button>
+                <button onclick="deleteCompany('${url}',${c.companyID})" class="btn btn-danger">Xóa</button>
             </td>
 
         </tr>

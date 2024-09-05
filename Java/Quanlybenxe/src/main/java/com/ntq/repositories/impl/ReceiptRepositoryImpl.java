@@ -44,15 +44,8 @@ public class ReceiptRepositoryImpl implements ReceiptRepository {
             s.save(order);
 
             for (Cart c : carts.values()) {
-//                System.out.println("Trip ID: " + c.getId()); // Log để kiểm tra giá trị của tripId
-//                Trip trip = this.tripRepo.getTripById(c.getId());
-//
-//                if (trip == null) {
-//                    throw new HibernateException("Trip not found for ID: " + c.getId());
-//                }
-                
                 OrderDetails d = new OrderDetails();
-                d.setTripId(this.tripRepo.getTripById(c.getId()));
+                d.setTrip(this.tripRepo.getTripById(c.getId()));
                 d.setOrderId(order);
                 d.setQuantity(c.getQuantity());
                 d.setPrice(c.getPrice());

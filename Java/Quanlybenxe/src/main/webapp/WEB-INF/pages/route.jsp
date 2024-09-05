@@ -35,9 +35,22 @@
         <label for="description">Mô tả</label>
     </div>
 
-    <div class="form-floating">
+        <!--    <div class="form-floating">
+                <button class="btn btn-info mt-1" type="submit">
+                    Thêm
+                </button>
+        <form:hidden path="routeID" />
+    </div>-->
+        <div class="form-floating">
         <button class="btn btn-info mt-1" type="submit">
-            Thêm
+            <c:choose>
+                <c:when test="${routeID != null}">
+                    Cập nhật
+                </c:when>
+                <c:otherwise>
+                    Thêm
+                </c:otherwise>
+            </c:choose>
         </button>
         <form:hidden path="routeID" />
     </div>

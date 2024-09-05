@@ -2,7 +2,6 @@ package com.ntq.repositories.impl;
 
 import com.ntq.pojo.OrderDetails;
 import com.ntq.pojo.Orders;
-import com.ntq.pojo.Route;
 import com.ntq.repositories.StatsRepository;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +32,7 @@ public class StatsRepositoryImpl implements StatsRepository{
 
             Root rD = q.from(OrderDetails.class);
             Root rO = q.from(Orders.class);
+            
 
             q.multiselect(b.function(period, Integer.class, rO.get("orderDate")), 
                     b.sum(b.prod(rD.get("quantity"), rD.get("price"))));
@@ -40,6 +40,8 @@ public class StatsRepositoryImpl implements StatsRepository{
             List<Predicate> predicates = new ArrayList<>();
             predicates.add(b.equal(rD.get("orderId"), rO.get("id")));
             predicates.add(b.equal(b.function("YEAR", Integer.class, rO.get("orderDate")), year));
+            
+          
 
             q.where(predicates.toArray(Predicate[]::new));
             q.groupBy(b.function(period, Integer.class, rO.get("orderDate")));

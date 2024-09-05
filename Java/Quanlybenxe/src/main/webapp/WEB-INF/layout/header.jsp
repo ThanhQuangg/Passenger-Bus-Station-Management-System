@@ -28,8 +28,7 @@
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="<c:url value="/trips"/>">Trip</a>
                     </li>
-            
-                    
+
                     <c:choose>
                         <c:when test="${pageContext.request.userPrincipal.name == null}">
                             <li class="nav-item">
@@ -37,9 +36,10 @@
                             </li>
                         </c:when>
                         <c:when test="${pageContext.request.userPrincipal.name != null}">
-
                             <li class="nav-item d-flex align-items-center">
-                                <img src="${user.avatar}" alt="Avatar" class="rounded-circle" style="width: 40px; height: 40px; margin-right: 10px;">
+                                <c:if test="${not empty user.avatar}">
+                                    <img src="${user.avatar}" alt="Avatar" class="rounded-circle" style="width: 40px; height: 40px; margin-right: 10px;">
+                                </c:if>
                                 <span class="text-green" style="align-items: center; margin-right: 10px">Xin chào ${pageContext.request.userPrincipal.name}</span>
                             </li>
                             <li class="nav-item">

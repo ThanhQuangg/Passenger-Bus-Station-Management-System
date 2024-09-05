@@ -13,19 +13,21 @@ import org.springframework.web.bind.annotation.PostMapping;
 import com.ntq.services.RouteService;
 import java.util.List;
 import java.util.Map;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 @Controller
 public class RouteController {
     @Autowired
     private RouteService routeServices;
 
-//    @GetMapping("/routes")
-//    public String createView(Model model) {
-//
-//        model.addAttribute("route", new Route());
-//        return "routes";
-//    }
+    @DeleteMapping("/routes/{routeID}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void delete(Model model, @PathVariable(value = "routeID") int routeID) {
+        this.routeServices.deleteRoute(routeID);
+    }
     
     @GetMapping("/routes")
     public String showRouteList(@RequestParam Map<String, String> params, Model model) {
@@ -37,7 +39,7 @@ public class RouteController {
     @GetMapping("/routes/add")
     public String showAddRouteForm(Model model) {
         model.addAttribute("route", new Route());
-        return "routes-form"; 
+        return "route-form"; 
     }
 
     @PostMapping("/routes")
@@ -46,7 +48,7 @@ public class RouteController {
         if (!rs.hasErrors()) {
             try {
                 this.routeServices.addOrUpdate(r);
-                return "redirect:/";
+                return "redirect:/routes";
             } catch (Exception ex) {
                 System.err.println(ex.getMessage());
             }
@@ -54,7 +56,7 @@ public class RouteController {
         
         model.addAttribute("route", r);
         
-        return "routes";
+        return "route-form";        
     }
 
     @GetMapping("/routes/{routeID}")

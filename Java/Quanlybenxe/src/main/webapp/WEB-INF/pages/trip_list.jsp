@@ -25,9 +25,9 @@
             <td>${t.busID.name}</td>
             <td>${t.companyID.companyName}</td>
             <td>
-                <c:url value="/api/trips/${t.tripID}" var="url" />
+                <c:url value="/trips/${t.tripID}" var="url" />
                 <a class="btn btn-info"href="<c:url value="/trips/${t.tripID}"/>" >Cập nhật</a>
-                <button onclick="deleteCategory('${url}',${c.categoryID})" class="btn btn-danger">Xóa</button>
+                <button onclick="deleteTrip('${url}',${t.tripID})" class="btn btn-danger">Xóa</button>
             </td>
 
         </tr>

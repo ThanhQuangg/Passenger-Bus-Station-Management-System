@@ -45,13 +45,7 @@ public class ApiCategoryController {
     @DeleteMapping("/categories/{categoryID}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(Model model, @PathVariable(value = "categoryID") int categoryID) {
-//        this.cateService.deleteCategory(categoryID);
-        Category category = this.cateService.getCategoryById(categoryID);
-        if (category != null) {
-            this.cateService.deleteCategory(categoryID);
-        } else {
-            throw new RuntimeException("Category not found");
-        }
+        this.cateService.deleteCategory(categoryID);
     }
 
     @PostMapping(path = "/categories", consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE})

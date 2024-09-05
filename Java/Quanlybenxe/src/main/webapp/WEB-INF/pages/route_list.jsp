@@ -25,9 +25,9 @@
             <td>${r.ticketPrice}</td>
             <td>${r.estimatedDuration}</td>
             <td>
-                <c:url value="/api/routes/${r.routeID}" var="url" />
+                <c:url value="/routes/${r.routeID}" var="url" />
                 <a class="btn btn-info"href="<c:url value="/routes/${r.routeID}"/>" >Cập nhật</a>
-                <button onclick="deleteCategory('${url}',${c.categoryID})" class="btn btn-danger">Xóa</button>
+                <button onclick="deleteRoute('${url}',${r.routeID})" class="btn btn-danger">Xóa</button>
             </td>
 
         </tr>

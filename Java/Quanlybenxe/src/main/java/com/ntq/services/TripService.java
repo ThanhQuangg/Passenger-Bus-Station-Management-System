@@ -1,6 +1,5 @@
 package com.ntq.services;
 
-import com.ntq.pojo.Bus;
 import com.ntq.pojo.Cart;
 import com.ntq.pojo.Trip;
 import java.util.List;

@@ -6,14 +6,17 @@ import java.util.List;
 import java.util.Map;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 @Controller
 public class CompanyController {
@@ -21,12 +24,12 @@ public class CompanyController {
     @Autowired
     private CompanyService companyService;
 
-//    @GetMapping("/companies")
-//    public String createView(Model model) {
-//
-//        model.addAttribute("company", new Company());
-//        return "companies";
-//    }
+    @DeleteMapping("/companies/{companyID}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void delete(Model model, @PathVariable(value = "companyID") int companyID) {
+        this.companyService.deleteCompany(companyID);
+    }
+    
     @GetMapping("/companies")
     public String showCompanyList(@RequestParam Map<String, String> params, Model model) {
         List<Company> companies = companyService.getCompanies(params);

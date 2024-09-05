@@ -4,7 +4,7 @@
 <h1 class="text-center text-info mt-1">QUẢN LÝ CHUYẾN XE</h1>
 
 <c:url value="/trips" var="action" />
-<form:form method="post" action="${action}" modelAttribute="trip" >
+<form:form method="post" action="${action}" modelAttribute="trip" enctype="multipart/form-data" >
     <form:errors path="*" element="div" cssClass="alert alert-danger" />
     <div class="form-floating mb-3 mt-3">
         <form:input class="form-control" id="name" placeholder="Tên chuyến xe" path="name" />
@@ -72,9 +72,17 @@
         </form:select>
         <label for="categoryID" class="form-label">Nhà xe:</label>
     </div>
+ 
     <div class="form-floating">
         <button class="btn btn-info mt-1" type="submit">
-            Thêm
+            <c:choose>
+                <c:when test="${tripID != null}">
+                    Cập nhật
+                </c:when>
+                <c:otherwise>
+                    Thêm
+                </c:otherwise>
+            </c:choose>
         </button>
         <form:hidden path="tripID" />
     </div>

@@ -44,17 +44,17 @@ const AddBus = () => {
         setBus(current => ({ ...current, [field]: e.target.value }));
     };
 
-    const validate = () => {
-        const newErrors = {};
-        if (!bus.name) newErrors.name = "Tên xe khách là bắt buộc";
-        if (!bus.plateNumber) newErrors.plateNumber = "Biển số xe là bắt buộc";
-        if (!bus.capacity || isNaN(bus.capacity)) newErrors.capacity = "Sức chứa phải là một số hợp lệ";
-        if (!bus.categoryID) newErrors.categoryID = "Bạn phải chọn loại xe";
-        if (!bus.companyID) newErrors.companyID = "Bạn phải chọn công ty";
+    // const validate = () => {
+    //     const newErrors = {};
+    //     if (!bus.name) newErrors.name = "Tên xe khách là bắt buộc";
+    //     if (!bus.plateNumber) newErrors.plateNumber = "Biển số xe là bắt buộc";
+    //     if (!bus.capacity || isNaN(bus.capacity)) newErrors.capacity = "Sức chứa phải là một số hợp lệ";
+    //     if (!bus.categoryID) newErrors.categoryID = "Bạn phải chọn loại xe";
+    //     if (!bus.companyID) newErrors.companyID = "Bạn phải chọn công ty";
 
-        setErrors(newErrors);
-        return Object.keys(newErrors).length === 0;
-    };
+    //     setErrors(newErrors);
+    //     return Object.keys(newErrors).length === 0;
+    // };
 
     const addOrUpdateBus = async (e) => {
         e.preventDefault();

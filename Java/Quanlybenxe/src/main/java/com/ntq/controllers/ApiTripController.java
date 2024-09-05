@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
 @RestController
 @RequestMapping("/api")
@@ -65,40 +66,40 @@ public class ApiTripController {
         trip.setTicketPrice(params.get("ticketPrice"));
         trip.setStatus(params.get("status"));
         trip.setCreatedAt(new Date());
-        
-//        // Chuyển đổi chuỗi thời gian thành Date
-//        String departureTimeStr = params.get("departureTime");
-//        if (departureTimeStr != null) {
-//            try {
-//                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
-//                Date departureTime = dateFormat.parse(departureTimeStr);
-//                trip.setDepartureTime(departureTime);
-//            } catch (ParseException e) {
-//                System.out.println("Định dạng thời gian không đúng.");
-//            }
-//        }
-//        // Chuyển đổi chuỗi thời gian thành Date
-//        String arrivalTimeStr = params.get("arrivalTime");
-//        if (arrivalTimeStr != null) {
-//            try {
-//                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
-//                Date arrivalTime = dateFormat.parse(arrivalTimeStr);
-//                trip.setArrivalTime(arrivalTime);
-//            } catch (ParseException e) {
-//                System.out.println("Định dạng thời gian không đúng.");
-//            }
-//        }
-//        // Sử dụng BigDecimal để chuyển đổi từ String
-//        String ticketPriceStr = params.get("ticketPrice");
-//        if (ticketPriceStr != null) {
-//            try {
-//                BigDecimal ticketPrice = new BigDecimal(ticketPriceStr);
-//                trip.setTicketPrice(ticketPrice);
-//            } catch (NumberFormatException e) {
-//                System.out.println("Giá vé không hợp lệ.");
-//            }
-//        }
-        
+        // Chuyển đổi busID từ chuỗi sang đối tượng Bus
+        int busId = Integer.parseInt(params.get("busID"));
+        Bus bus = busService.getBusesById(busId);
+        System.out.println("Bus Capacity: " + bus.getCapacity());
+        trip.setBusID(bus);
+
+        // Chuyển đổi routeID từ chuỗi sang đối tượng Route
+        int routeId = Integer.parseInt(params.get("routeID"));
+        Route route = routeService.getRoutesById(routeId);
+        trip.setRouteID(route);
+
+        // Chuyển đổi companyID từ chuỗi sang đối tượng Route
+        int companyId = Integer.parseInt(params.get("companyID"));
+        Company company = companyService.getCompaniesById(companyId);
+        trip.setCompanyID(company);
+
+        this.tripService.addOrUpdate(trip);
+    }
+
+    @PostMapping(path = "/trips/{tripID}", consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE})
+    @ResponseStatus(HttpStatus.OK)
+    @CrossOrigin
+    public void updateTrip(@PathVariable(value = "tripID") int tripID, @RequestParam Map<String, String> params) {
+        Trip trip = tripService.getTripById(tripID);
+
+        if (trip == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Trip not found with ID: " + tripID);
+        }
+
+        trip.setName(params.get("name"));
+        trip.setDepartureTime(params.get("departureTime"));
+        trip.setArrivalTime(params.get("arrivalTime"));
+        trip.setTicketPrice(params.get("ticketPrice"));
+        trip.setStatus(params.get("status"));
 
         // Chuyển đổi busID từ chuỗi sang đối tượng Bus
         int busId = Integer.parseInt(params.get("busID"));
@@ -109,8 +110,8 @@ public class ApiTripController {
         int routeId = Integer.parseInt(params.get("routeID"));
         Route route = routeService.getRoutesById(routeId);
         trip.setRouteID(route);
-        
-        // Chuyển đổi companyID từ chuỗi sang đối tượng Route
+
+        // Chuyển đổi companyID từ chuỗi sang đối tượng Company
         int companyId = Integer.parseInt(params.get("companyID"));
         Company company = companyService.getCompaniesById(companyId);
         trip.setCompanyID(company);
@@ -123,13 +124,13 @@ public class ApiTripController {
     public void delete(Model model, @PathVariable(value = "tripID") int tripID) {
         this.tripService.deleteTrip(tripID);
     }
-    
+
     @GetMapping("/buses/{busId}/trips")
     public ResponseEntity<List<Trip>> getTripsByBus(@PathVariable("busId") int busId) {
         List<Trip> trips = tripService.getTripsByBusId(busId);
         return new ResponseEntity<>(trips, HttpStatus.OK);
     }
-    
+
     @PutMapping(path = "/trips/{tripID}", consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
     @CrossOrigin

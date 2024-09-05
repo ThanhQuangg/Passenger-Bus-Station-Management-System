@@ -48,39 +48,9 @@ public class ApiRouteController {
         route.setName(params.get("name"));
         route.setStartLocation(params.get("startLocation"));
         route.setEndLocation(params.get("endLocation"));
-        
         route.setDistance(params.get("distance"));
         route.setTicketPrice(params.get("ticketPrice"));
         route.setEstimatedDuration(params.get("estimatedDuration"));
-// Sử dụng BigDecimal để chuyển đổi từ String
-//        String distanceStr = params.get("distance");
-//        if (distanceStr != null) {
-//            BigDecimal distance = new BigDecimal(distanceStr);
-//            route.setDistance(distance);
-//        }
-//        // Sử dụng BigDecimal để chuyển đổi từ String
-//        String ticketPriceStr = params.get("ticketPrice");
-//        if (ticketPriceStr != null) {
-//            BigDecimal ticketPrice = new BigDecimal(ticketPriceStr);
-//            route.setTicketPrice(ticketPrice);
-//        }
-//
-//        String estimatedDurationStr = params.get("estimatedDuration");
-//        if (estimatedDurationStr != null) {
-//            try {
-//                // Parse chuỗi thời gian và chuyển đổi thành LocalTime
-//                LocalTime estimatedDuration = LocalTime.parse(estimatedDurationStr, DateTimeFormatter.ofPattern("HH:mm:ss"));
-//
-//                // Chuyển đổi LocalTime thành Instant (có sử dụng mặc định ngày hiện tại và múi giờ UTC)
-//                Instant instant = estimatedDuration.atDate(LocalDate.now()).atZone(ZoneId.systemDefault()).toInstant();
-//
-//                // Chuyển đổi Instant thành Time (kiểu SQL)
-//                Time sqlTime = new Time(instant.toEpochMilli());
-//                route.setEstimatedDuration(sqlTime);
-//            } catch (DateTimeParseException e) {
-//                System.out.println("Định dạng thời gian không đúng.");
-//            }
-//        }
         route.setDescription(params.get("description"));
         route.setCreatedAt(new Date());
 
@@ -92,7 +62,7 @@ public class ApiRouteController {
     public void delete(Model model, @PathVariable(value = "routeID") int routeID) {
         this.routeService.deleteRoute(routeID);
     }
-    
+
     @PutMapping(path = "/routes/{routeID}", consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
     @CrossOrigin

@@ -8,7 +8,7 @@
         <put-attribute name="header" value="/WEB-INF/layout/header.jsp" />
         <put-attribute name="footer" value="/WEB-INF/layout/footer.jsp" />
         <put-attribute name="content" value="" />
-         <put-attribute name="sidebar" value="/WEB-INF/layout/sidebar.jsp" />
+        <put-attribute name="sidebar" value="/WEB-INF/layout/sidebar.jsp" />
     </definition>
     <definition name="index" extends="baseLayout">
         <put-attribute name="title" value="Trang chủ quản trị" />
@@ -70,7 +70,11 @@
         <put-attribute name="content" value="/WEB-INF/pages/trip_list.jsp" />
     </definition>
     
-    
+    <definition name="trips" extends="baseLayout">
+        <put-attribute name="title" value="Thêm chuyến xe" />
+        <put-attribute name="content" value="/WEB-INF/pages/trip_list.jsp" />
+    </definition>
+        
     
     <definition name="stats" extends="baseLayout">
         <put-attribute name="title" value="Trang quản thống kê " />

@@ -21,25 +21,25 @@ const Trip = () => {
     const nav = useNavigate();
 
     const formatDate = (dateString) => {
-        const options = {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric',
-            hour: 'numeric',
-            minute: 'numeric',
-            hour12: false
-        };
         const date = new Date(dateString);
-        const formattedDate = date.toLocaleDateString('vi-VN', options);
-
-        const parts = formattedDate.split(' ');
-        const time = parts[parts.length - 2];
-        const day = parts[0];
-        const month = parts[2];
-        const year = parts[parts.length - 1];
-
-        return `lúc ${time} ngày ${day} ${month} năm ${year}`;
+    
+        if (isNaN(date.getTime())) {
+            return '';
+        }
+    
+        const optionsDate = { year: 'numeric', month: 'numeric', day: 'numeric' };
+        const optionsTime = { hour: 'numeric', minute: 'numeric', hour12: false };
+    
+        const formattedDate = date.toLocaleDateString('vi-VN', optionsDate);
+        const formattedTime = date.toLocaleTimeString('vi-VN', optionsTime);
+    
+        const [day, month, year] = formattedDate.split('/');
+        const [hours, minutes] = formattedTime.split(':');
+    
+        return `lúc ${hours} giờ ${minutes} phút ngày ${day} tháng ${month} năm ${year}`;
     };
+    
+    
 
     const searchTrip = (e) => {
         e.preventDefault();

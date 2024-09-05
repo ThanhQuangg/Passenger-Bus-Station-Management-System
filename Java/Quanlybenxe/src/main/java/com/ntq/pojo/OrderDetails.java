@@ -1,6 +1,5 @@
 package com.ntq.pojo;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -39,10 +38,10 @@ public class OrderDetails implements Serializable {
     @JoinColumn(name = "order_id", referencedColumnName = "id")
     @ManyToOne(optional = false, cascade = CascadeType.ALL)
     private Orders orderId;
-    @JoinColumn(name = "trip_id", referencedColumnName = "TripID")
+
     @ManyToOne(optional = false)
-   
-    private Trip tripId;
+    @JoinColumn(name = "trip_id", referencedColumnName = "TripID")
+    private Trip trip;
 
     public OrderDetails() {
     }
@@ -83,14 +82,6 @@ public class OrderDetails implements Serializable {
         this.orderId = orderId;
     }
 
-    public Trip getTripId() {
-        return tripId;
-    }
-
-    public void setTripId(Trip tripId) {
-        this.tripId = tripId;
-    }
-
     @Override
     public int hashCode() {
         int hash = 0;
@@ -115,5 +106,13 @@ public class OrderDetails implements Serializable {
     public String toString() {
         return "com.ntq.pojo.OrderDetails[ id=" + id + " ]";
     }
-    
+
+    public Trip getTrip() {
+        return trip;
+    }
+
+    public void setTrip(Trip trip) {
+        this.trip = trip;
+    }
+
 }

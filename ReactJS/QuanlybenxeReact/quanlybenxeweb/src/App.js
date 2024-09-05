@@ -62,7 +62,7 @@ const App = () => {
                                     <Route path="/update-company/:companyID" element={<AddCompany />} />
                                     <Route path="/update-cate/:categoryID" element={<UpdateCategory />} />
                                     <Route path="/update-route/:routeID" element={<UpdatePath />} />
-                                    <Route path="/update-trip/:tripID" element={<UpdateTrip />} />
+                                    <Route path="/update-trip/:tripID" element={<AddTrip />} />
                                 </>
                             )}
                             <Route path="*" element={<Navigate to="/login" />} />

@@ -16,7 +16,7 @@
             <td>${c.name}</td>
             <td>${c.description}</td>
             <td>
-                <c:url value="/api/categories/${c.categoryID}" var="url" />
+                <c:url value="/categories/${c.categoryID}" var="url" />
                 <a class="btn btn-info"href="<c:url value="/categories/${c.categoryID}"/>" >Cập nhật</a>
                 <button onclick="deleteCategory('${url}',${c.categoryID})" class="btn btn-danger">Xóa</button>
             </td>

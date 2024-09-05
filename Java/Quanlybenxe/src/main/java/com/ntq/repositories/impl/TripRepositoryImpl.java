@@ -117,7 +117,7 @@ public class TripRepositoryImpl implements TripRepository {
                 d.setPrice(c.getPrice());
                 d.setQuantity(c.getQuantity());
                 d.setOrderId(r);
-                d.setTripId(this.getTripById(c.getId()));
+                d.setTrip(this.getTripById(c.getId()));
                 s.save(d);
             }
             return true;

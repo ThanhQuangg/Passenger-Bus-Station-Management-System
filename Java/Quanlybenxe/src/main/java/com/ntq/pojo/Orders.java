@@ -1,10 +1,12 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package com.ntq.pojo;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.Set;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,15 +16,15 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
-
+/**
+ *
+ * @author ACER
+ */
 @Entity
 @Table(name = "orders")
 @XmlRootElement
@@ -38,23 +40,21 @@ public class Orders implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "order_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date orderDate;
-    @JoinColumn(name = "user_id", referencedColumnName = "UserID")
+    @JoinColumn(name = "companyID", referencedColumnName = "CompanyID")
     @ManyToOne
+    private Company companyID;
+    @JoinColumn(name = "user_id", referencedColumnName = "UserID")
+    @ManyToOne(optional = false)
     private User userId;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "orderId")
-    private Set<OrderDetails> orderDetailsSet;
 
     public Orders() {
     }
 
-    public Orders(Integer id, Date orderDate) {
+    public Orders(Integer id) {
         this.id = id;
-        this.orderDate = orderDate;
     }
 
     public Integer getId() {
@@ -73,21 +73,20 @@ public class Orders implements Serializable {
         this.orderDate = orderDate;
     }
 
+    public Company getCompanyID() {
+        return companyID;
+    }
+
+    public void setCompanyID(Company companyID) {
+        this.companyID = companyID;
+    }
+
     public User getUserId() {
         return userId;
     }
 
     public void setUserId(User userId) {
         this.userId = userId;
-    }
-
-    @XmlTransient
-    public Set<OrderDetails> getOrderDetailsSet() {
-        return orderDetailsSet;
-    }
-
-    public void setOrderDetailsSet(Set<OrderDetails> orderDetailsSet) {
-        this.orderDetailsSet = orderDetailsSet;
     }
 
     @Override
@@ -114,5 +113,5 @@ public class Orders implements Serializable {
     public String toString() {
         return "com.ntq.pojo.Orders[ id=" + id + " ]";
     }
-
+    
 }

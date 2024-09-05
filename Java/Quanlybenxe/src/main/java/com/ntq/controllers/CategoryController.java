@@ -9,13 +9,16 @@ import com.ntq.services.CategoryService;
 import java.util.List;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 @Controller
 public class CategoryController {
@@ -41,7 +44,7 @@ public class CategoryController {
         if (!rs.hasErrors()) {
             try {
                 this.categoryServices.addOrUpdate(c);
-                return "redirect:/";
+                return "redirect:/categories";
             } catch (Exception ex) {
                 System.err.println(ex.getMessage());
             }
@@ -49,7 +52,7 @@ public class CategoryController {
         
         model.addAttribute("category", c);
         
-        return "categories";
+        return "category-form";
     }
 
     @GetMapping("/categories/{categoryID}")
@@ -57,5 +60,11 @@ public class CategoryController {
         model.addAttribute("category", this.categoryServices.getCategoryById(categoryID));
 
         return "category-form";
+    }
+    
+    @DeleteMapping("/categories/{categoryID}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void delete(Model model, @PathVariable(value = "categoryID") int categoryID) {
+        this.categoryServices.deleteCategory(categoryID);
     }
 }

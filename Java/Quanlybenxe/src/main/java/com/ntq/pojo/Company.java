@@ -85,6 +85,9 @@ public class Company implements Serializable {
     @OneToMany(mappedBy = "companyID")
     @JsonIgnore
     private Set<Comment> commentSet;
+    @OneToMany(mappedBy = "companyID")
+    @JsonIgnore
+    private Set<Orders> ordersSet;
     @Transient
     private MultipartFile file;
 
@@ -208,6 +211,14 @@ public class Company implements Serializable {
     @PreUpdate
     protected void onUpdate() {
         this.updatedAt = new Date();
+    }
+    @XmlTransient
+    public Set<Orders> getOrdersSet() {
+        return ordersSet;
+    }
+
+    public void setOrdersSet(Set<Orders> ordersSet) {
+        this.ordersSet = ordersSet;
     }
 
     @Override
